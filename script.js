@@ -1,33 +1,33 @@
-var chords = document.getElementById("chords");
+let char = document.querySelector("#char")
 
-document.querySelector("form").addEventListener("submit", (event) => {
-    event.preventDefault();
-    // let inputData = document.querySelector("[data-input]").value;
-    fetch("https://api.uberchord.com/v1/chords?nameLike=C")
-    // + inputData
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        chords.append(chordInfo(data.Array(1).chordName));
-        // for(let i = 0; i < 10; i++)
-        // {
-        //   chords.append(chordInfo(data.i.chordName));
-        // }
-        // chords.append(chordInfo(data.chords?nameLike.chordName:inputData));
-      })
+getData()
 
-      .catch(err =>{
-        console.error(err);
-      });
-    });
+function getData(){
+for(let i = 1; i <= 9; i++){
+  fetch("https://swapi.dev/api/people/?page=" + i)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+      
+      for(let i = 0; i < data.results.length; i++){
+        console.log(data.results[i].name)
+        char.append(printChar(data.results[i].name, data.results[i].films))
+      }
+    })
+    .catch(err =>{
+      console.error(err)
+    })
+  }
+}
 
-function chordInfo(chordName){
-  let chordContainer = document.createElement("div");
-  chordContainer.classList.add("chord-container");
-  let chordNameStat = document.createElement("div");
-  chordNameStat.innerText = chordName;
-  let chordFingeringStat = document.createElement("div");
-  chordContainer.append(chordNameStat, chordFingeringStat);
+function printChar(name, films){
+  let charContainer = document.createElement("div")
+  charContainer.classList.add("char-container")
+  let charName = document.createElement("div")
+  let charFilms = document.createElement("div")
+  charFilms.innerText = films
+  charName.innerText = name
+  charContainer.append(charName, charFilms)
 
-  return chordContainer;
+  return charContainer
 }
