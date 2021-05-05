@@ -1,4 +1,4 @@
-let char = document.querySelector("#char")
+// let char = document.querySelector("#char")
 
 getData()
 
@@ -8,7 +8,6 @@ for(let i = 1; i <= 9; i++){
     .then((response) => response.json())
     .then((data) => {
       console.log(data)
-      
       for(let i = 0; i < data.results.length; i++){
         console.log(data.results[i].name)
         char.append(printChar(data.results[i].name, data.results[i].films))
