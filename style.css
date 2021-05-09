@@ -1,3 +1,64 @@
-.container {
-  border: 1px solid black;
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+*{
+  background: black;
+  color: yellow;
+  font-family: 'Bungee', cursive;
+  letter-spacing: 2px;
 }
+
+.app-root {
+  position: relative;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: minmax(100px, auto);
+}
+
+.container{
+  border: 1px solid yellow;
+  margin: 5px;
+}
+
+::-webkit-scrollbar{
+  width: 0;
+}
+
+#scrollbar{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 2vw;
+  height: 100%;
+  background: rgba(255,255,255,0.05);
+}
+
+#progressbar{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 2vw;
+  background: linear-gradient(to bottom, #008aff, #00dfe7);
+}
+
+#progressbar:before{
+content: '';
+position: absolute;
+top: 0;
+right: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to bottom, #008aff, #00dfe7);
+filter: blur(10px);
+}
+
+#progressbar:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #008aff, #00dfe7);
+  filter: blur(30px);
+  }

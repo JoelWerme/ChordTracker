@@ -1,5 +1,15 @@
 let appRoot = document.querySelector("#container")
+appRoot.classList.add("app-root")
 
+//effects
+let progress = document.querySelector("#progressbar")
+let totalHeight = document.body.scrollHeight - window.innerHeight
+window.onscroll = function(){
+  let progressHeight = (-window.pageYOffset / totalHeight) * 4
+  progress.style.height = progressHeight + "%"
+}
+
+//content
 getData()
 
 function getData(){
@@ -27,15 +37,16 @@ function generateChar(name, films, homeworld){
   let container = document.createElement("div")
   container.classList.add("container")
   //create header with name
-  let charHeader = document.createElement("h2")
+  let charHeader = document.createElement("div")
   charHeader.innerText = name
-  let filmsHeader = document.createElement("h3")
+  let filmsHeader = document.createElement("div")
   filmsHeader.innerText = "Appearances: "
   //add content to container
+  charHeader.append(fetchHome(homeworld))
   container.append(charHeader)
-  container.append(fetchHome(homeworld))
+  filmsHeader.append(fetchFilms(films))
   container.append(filmsHeader)
-  container.append(fetchFilms(films))
+  console.log(container)
   //add container to appRoot
   appRoot.append(container)
 }
