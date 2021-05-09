@@ -2,11 +2,17 @@ let appRoot = document.querySelector("#container")
 appRoot.classList.add("app-root")
 
 //effects
-let progress = document.querySelector("#progressbar")
+let progressRight = document.querySelector("#progressbar-right")
 let totalHeight = document.body.scrollHeight - window.innerHeight
+let progressLeft = document.querySelector("#progressbar-left")
+let totalHeightLeft = document.body.scrollHeight - window.innerHeight
 window.onscroll = function(){
-  let progressHeight = (-window.pageYOffset / totalHeight) * 4
-  progress.style.height = progressHeight + "%"
+  let progressHeight = (-window.pageYOffset / totalHeight) * 4.5
+  progressRight.style.height = progressHeight + "%"
+  let progressHeightLeft = (-window.pageYOffset / totalHeight) * 4.5
+  progressLeft.style.height = progressHeightLeft + "%"
+  console.log(progressHeightLeft)
+  console.log(progressHeight)
 }
 
 //content
@@ -37,7 +43,7 @@ function generateChar(name, films, homeworld){
   let container = document.createElement("div")
   container.classList.add("container")
   //create header with name
-  let charHeader = document.createElement("div")
+  let charHeader = document.createElement("h2")
   charHeader.innerText = name
   let filmsHeader = document.createElement("div")
   filmsHeader.innerText = "Appearances: "

@@ -1,13 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
 
-*{
+* {
   background: black;
   color: yellow;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
+  /* text-shadow: 2px 2px 2px rgb(255, 208, 0); */
   letter-spacing: 2px;
 }
 
 .app-root {
+  padding: 2vw;
   position: relative;
   max-width: 100%;
   display: grid;
@@ -15,50 +17,90 @@
   grid-template-rows: minmax(100px, auto);
 }
 
-.container{
+.container {
+  padding: 1vw;
   border: 1px solid yellow;
   margin: 5px;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 0;
 }
 
-#scrollbar{
+#scrollbar-right {
   position: fixed;
   top: 0;
   right: 0;
-  width: 2vw;
+  width: 1vw;
   height: 100%;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-#progressbar{
+#progressbar-right {
   position: fixed;
   top: 0;
   right: 0;
-  width: 2vw;
-  background: linear-gradient(to bottom, #008aff, #00dfe7);
+  width: 1vw;
+  background: linear-gradient(to bottom, #39cc2c, #2ff923);
 }
 
-#progressbar:before{
-content: '';
-position: absolute;
-top: 0;
-right: 0;
-width: 100%;
-height: 100%;
-background: linear-gradient(to bottom, #008aff, #00dfe7);
-filter: blur(10px);
-}
-
-#progressbar:after{
-  content: '';
+#progressbar-right:before {
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #008aff, #00dfe7);
+  background: linear-gradient(to bottom, #39cc2c, #2ff923);
+  filter: blur(10px);
+}
+
+#progressbar-right:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #39cc2c, #2ff923);
   filter: blur(30px);
-  }
+}
+
+#scrollbar-left {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 1vw;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#progressbar-left {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 1vw;
+  background: linear-gradient(to bottom, #eb212e, #ff4653);
+}
+
+#progressbar-left:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #eb212e, #ff4653);
+  filter: blur(10px);
+}
+
+#progressbar-left:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #eb212e, #ff4653);
+  filter: blur(30px);
+}
