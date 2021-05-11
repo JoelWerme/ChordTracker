@@ -7,9 +7,9 @@ let totalHeight = document.body.scrollHeight - window.innerHeight
 let progressLeft = document.querySelector("#progressbar-left")
 let totalHeightLeft = document.body.scrollHeight - window.innerHeight
 window.onscroll = function(){
-  let progressHeight = (-window.pageYOffset / totalHeight) * 4.5
+  let progressHeight = (-window.pageYOffset / totalHeight) * 4
   progressRight.style.height = progressHeight + "%"
-  let progressHeightLeft = (-window.pageYOffset / totalHeight) * 4.5
+  let progressHeightLeft = (-window.pageYOffset / totalHeight) * 4
   progressLeft.style.height = progressHeightLeft + "%"
   console.log(progressHeightLeft)
   console.log(progressHeight)
@@ -80,4 +80,9 @@ fetch(input)
     console.log(charHome)
   })
   return charHome
+}
+
+function scrollEvent(){
+  let scrollEvent = document.querySelector(["header"])
+  scrollEvent.style.backgroundColor = "#ffffff"
 }
