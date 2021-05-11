@@ -7,9 +7,9 @@ let totalHeight = document.body.scrollHeight - window.innerHeight
 let progressLeft = document.querySelector("#progressbar-left")
 let totalHeightLeft = document.body.scrollHeight - window.innerHeight
 window.onscroll = function(){
-  let progressHeight = (-window.pageYOffset / totalHeight) * 4
+  let progressHeight = (-window.pageYOffset / totalHeight) * 10
   progressRight.style.height = progressHeight + "%"
-  let progressHeightLeft = (-window.pageYOffset / totalHeight) * 4
+  let progressHeightLeft = (-window.pageYOffset / totalHeight) * 10
   progressLeft.style.height = progressHeightLeft + "%"
   console.log(progressHeightLeft)
   console.log(progressHeight)
@@ -52,7 +52,6 @@ function generateChar(name, films, homeworld){
   container.append(charHeader)
   filmsHeader.append(fetchFilms(films))
   container.append(filmsHeader)
-  console.log(container)
   //add container to appRoot
   appRoot.append(container)
 }
@@ -64,6 +63,7 @@ function fetchFilms(films){
     .then((response) => response.json())
     .then((data) => {
       let charFilms = document.createElement("p")
+      charFilms.classList.add("char-films")
       charFilms.innerText = data.title
       filmsContainer.append(charFilms)
     }
@@ -77,12 +77,12 @@ fetch(input)
   .then((response) => response.json())
   .then((data) => {
     charHome.innerText = "Homeworld: " + data.name
-    console.log(charHome)
   })
   return charHome
 }
 
-function scrollEvent(){
-  let scrollEvent = document.querySelector(["header"])
-  scrollEvent.style.backgroundColor = "#ffffff"
-}
+
+window.addEventListener("scroll", function(){
+  let header = document.querySelector("header")
+header.classList.toggle("sticky", window.scrollY > 0)
+})
