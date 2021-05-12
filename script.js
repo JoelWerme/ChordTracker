@@ -1,35 +1,33 @@
 let appRoot = document.querySelector("#container")
 appRoot.classList.add("app-root")
+let chars = [];
 
 //effects
-let progressRight = document.querySelector("#progressbar-right")
+let progress = document.querySelector("#progressbar")
 let totalHeight = document.body.scrollHeight - window.innerHeight
-let progressLeft = document.querySelector("#progressbar-left")
-let totalHeightLeft = document.body.scrollHeight - window.innerHeight
 window.onscroll = function(){
-  let progressHeight = (-window.pageYOffset / totalHeight) * 10
-  progressRight.style.height = progressHeight + "%"
-  let progressHeightLeft = (-window.pageYOffset / totalHeight) * 10
-  progressLeft.style.height = progressHeightLeft + "%"
-  console.log(progressHeightLeft)
-  console.log(progressHeight)
+  let progressHeight = (-window.pageYOffset / totalHeight) * 15
+  progress.style.height = progressHeight + "%"
+  console.log(progress)
 }
 
 //content
 getData()
-
+let char = 0;
 function getData(){
 for(let i = 1; i <= 9; i++){
   fetch("https://swapi.dev/api/people/?page=" + i)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
+      // console.log(data)
       for(let i = 0; i < data.results.length; i++){
         generateChar(
           data.results[i].name, 
           data.results[i].films,
           data.results[i].homeworld
           )
+          chars[char] = data.results[i]
+          char = char + 1
       }
     })
     .catch(err =>{
@@ -48,8 +46,9 @@ function generateChar(name, films, homeworld){
   let filmsHeader = document.createElement("div")
   filmsHeader.innerText = "Appearances: "
   //add content to container
-  charHeader.append(fetchHome(homeworld))
+  // charHeader.append(fetchHome(homeworld))
   container.append(charHeader)
+  container.append(fetchHome(homeworld))
   filmsHeader.append(fetchFilms(films))
   container.append(filmsHeader)
   //add container to appRoot
@@ -86,3 +85,20 @@ window.addEventListener("scroll", function(){
   let header = document.querySelector("header")
 header.classList.toggle("sticky", window.scrollY > 0)
 })
+
+let searchBar = document.querySelector("[data-search-bar]")
+searchBar.addEventListener('keyup', (event) =>{
+  event.preventDefault()
+    
+  let search = document.querySelector("[data-search]").value
+  let filteredChar = chars.filter((chars) => {
+    return(
+      chars.name.includes(search) ||
+      chars.films.includes(search)
+    )
+  })
+  console.log(filteredChar)
+})  
+for(let i = 0; i < chars.length; i++){
+    console.log(chars[i].name)
+  }
