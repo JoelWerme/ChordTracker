@@ -1,4 +1,5 @@
 let appRoot = document.querySelector("#container")
+let appRootS = document.querySelector("#containerS")
 appRoot.classList.add("app-root")
 let chars = [];
 
@@ -6,9 +7,8 @@ let chars = [];
 let progress = document.querySelector("#progressbar")
 let totalHeight = document.body.scrollHeight - window.innerHeight
 window.onscroll = function(){
-  let progressHeight = (-window.pageYOffset / totalHeight) * 15
+  let progressHeight = (-window.pageYOffset / totalHeight) * 17
   progress.style.height = progressHeight + "%"
-  console.log(progress)
 }
 
 //content
@@ -19,7 +19,6 @@ for(let i = 1; i <= 9; i++){
   fetch("https://swapi.dev/api/people/?page=" + i)
     .then((response) => response.json())
     .then((data) => {
-      // console.log(data)
       for(let i = 0; i < data.results.length; i++){
         generateChar(
           data.results[i].name, 
@@ -36,6 +35,24 @@ for(let i = 1; i <= 9; i++){
   }
 }
 
+function addSearch(name, films, homeworld){
+  //create container
+  let container = document.createElement("div")
+  container.classList.add("containerS")
+  //create header with name
+  let charHeader = document.createElement("h2")
+  charHeader.innerText = name
+  let filmsHeader = document.createElement("div")
+  filmsHeader.innerText = "Appearances: "
+    //add content to container
+  container.append(charHeader)
+  container.append(fetchHome(homeworld))
+  filmsHeader.append(fetchFilms(films))
+  container.append(filmsHeader)
+  //add container to appRoot
+  appRootS.append(container)
+}
+
 function generateChar(name, films, homeworld){
   //create container
   let container = document.createElement("div")
@@ -46,7 +63,6 @@ function generateChar(name, films, homeworld){
   let filmsHeader = document.createElement("div")
   filmsHeader.innerText = "Appearances: "
   //add content to container
-  // charHeader.append(fetchHome(homeworld))
   container.append(charHeader)
   container.append(fetchHome(homeworld))
   filmsHeader.append(fetchFilms(films))
@@ -80,16 +96,15 @@ fetch(input)
   return charHome
 }
 
-
 window.addEventListener("scroll", function(){
   let header = document.querySelector("header")
 header.classList.toggle("sticky", window.scrollY > 0)
 })
 
+//Search function is unstable, might generate too many requests, will add container at the bottom
 let searchBar = document.querySelector("[data-search-bar]")
-searchBar.addEventListener('keyup', (event) =>{
+searchBar.addEventListener('submit', (event) =>{
   event.preventDefault()
-    
   let search = document.querySelector("[data-search]").value
   let filteredChar = chars.filter((chars) => {
     return(
@@ -97,8 +112,11 @@ searchBar.addEventListener('keyup', (event) =>{
       chars.films.includes(search)
     )
   })
-  console.log(filteredChar)
-})  
-for(let i = 0; i < chars.length; i++){
-    console.log(chars[i].name)
+  for(let i = 0; i < filteredChar.length; i++){
+    generateChar(
+      filteredChar[i].name, 
+      filteredChar[i].films,
+      filteredChar[i].homeworld
+      )
   }
+}) 
