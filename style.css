@@ -35,6 +35,10 @@ header .content *{
   text-decoration: none;
 }
 
+header .content *:hover{
+  color: white !important;
+}
+
 
 #index-main{
   display: flex;
@@ -216,8 +220,16 @@ button *{
 
 footer{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-top: 1px solid yellow;
+}
+
+.footer-info{
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
 }
 
 @media screen and (max-width: 1000px){
