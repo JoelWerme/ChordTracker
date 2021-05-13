@@ -219,23 +219,33 @@ button *{
 }
 
 footer{
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-top: 1px solid yellow;
+  background-color: black;
 }
 
 .footer-info{
   display: flex;
   justify-content: space-evenly;
-  width: 40%;
+  width: 60%;
 }
 
-@media screen and (max-width: 1000px){
+.footer-info a{
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1024px){
   header .content *{
     padding: 10px;
     text-decoration: none;
+  }
+
+  #index-main h2{
+    font-size: 4vw;
   }
 
   #news {
@@ -247,5 +257,13 @@ footer{
   #news .news-container{
     grid-column: unset !important;
     grid-row: unset !important;
+  }
+
+  footer{
+   font-size: 2vw;
+  }
+
+  .footer-info{
+    width: 100%;
   }
 }
